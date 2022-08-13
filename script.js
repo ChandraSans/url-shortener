@@ -1,25 +1,27 @@
-const resultData = document.querySelector(".hasil");
-    let copyBtn = document.querySelector(".copy");
-    let whatsappBtn = document.querySelector(".whatsapp");
-    
-    function createUrl() {
-      let url = "http://tinyurl.com/api-create.php?url=";
-      let data = document.getElementById("inputUrl");
-      let input = data.value;
-      fetch(url + input)
-      .then((response) => response.text())
-      .then((hasil) => { 
-        // console.log(hasil); 
-          resultData.innerHTML = hasil;
-      });
-    }
-    
-    
-    copyBtn.addEventListener("click", ()=>{
-    navigator.clipboard.writeText(resultData.innerHTML);
+const quoteText = document.querySelector(".hasil"),
+
+quoteBtn = document.querySelector("button"),
+inputUrl = document.querySelector("#inputUrl"),
+copyBtn = document.querySelector(".copy"),
+whatsappBtn = document.querySelector(".whatsapp");
+
+
+function createUrl(){
+    fetch("http://tinyurl.com/api-create.php?url=" + inputUrl.value)
+    .then(res => res.text())
+    .then(body =>
+    {
+     quoteText.innerText = body;
     });
-  
-    whatsappBtn.addEventListener("click", ()=>{
-    let weaUrl = `https://api.whatsapp.com/send?phone=&text=${resultData.innerHTML}`;
+}
+
+copyBtn.addEventListener("click", ()=>{
+    navigator.clipboard.writeText(quoteText.innerText);
+});
+
+whatsappBtn.addEventListener("click", ()=>{
+    let weaUrl = `https://api.whatsapp.com/send?phone=&text=${quoteText.innerText}`;
     window.open(weaUrl, "_blank");
-    });
+});
+
+quoteBtn.addEventListener("click", createUrl);
