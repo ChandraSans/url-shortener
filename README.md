@@ -1,1 +1,1 @@
-# Url Shortener <a href="https://www.instagram.com/rafiadichandra_">rafiadichandra_</a>
+# Url Shortener [Follow me](https://instagram.com/rafiadichandra_).
